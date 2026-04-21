@@ -1,5 +1,25 @@
 const form = document.querySelector("form");
 const addButton = document.querySelector(".add-button");
+const DRINK_NAMES = {
+    espresso: 'Эспрессо',
+    capuccino: 'Капучино',
+    cacao: 'Какао',
+};
+
+const MILK_NAMES = {
+    usual: 'обычное',
+    'no-fat': 'обезжиренное',
+    soy: 'соевое',
+    coconut: 'кокосовое',
+};
+
+const OPTION_NAMES = {
+    'whipped cream': 'взбитые сливки',
+    marshmallow: 'зефирки',
+    chocolate: 'шоколад',
+    cinnamon: 'корица',
+};
+
 
 function getBeverageCount() {
     return form.querySelectorAll(".beverage").length;
@@ -79,3 +99,33 @@ form.addEventListener("submit", (event) => {
 
 modalClose.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
+
+
+function collectOrderData() {
+    const beverages = form.querySelectorAll('.beverage');
+    return Array.from(beverages).map((fieldset) => {
+        const drink = fieldset.querySelector('select').value;
+        const milk = fieldset.querySelector('input[type="radio"]:checked').value;
+        const options = Array.from(
+            fieldset.querySelectorAll('input[type="checkbox"]:checked')
+        ).map((cb) => OPTION_NAMES[cb.value]);
+
+        return {
+            drink: DRINK_NAMES[drink],
+            milk: MILK_NAMES[milk],
+            options: options.join(', '),
+        };
+    });
+}
+
+function buildOrderTable(orders) {
+    const headerRow = '<tr><th>Напиток</th><th>Молоко</th><th>Дополнительно</th></tr>';
+    const bodyRows = orders
+        .map(
+            (order) =>
+                `<tr><td>${order.drink}</td><td>${order.milk}</td><td>${order.options}</td></tr>`
+        )
+        .join('');
+
+    return `<table class="order-table"><thead>${headerRow}</thead><tbody>${bodyRows}</tbody></table>`;
+}
