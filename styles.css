@@ -2,6 +2,7 @@
     border: 1px solid #eee;
     margin: 15px 0;
     padding: 15px;
+    position: relative;
 }
 
 .beverage-count {
@@ -84,4 +85,20 @@
 
 .hidden {
     display: none;
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
+}
+
+.delete-button:hover {
+    color: #e00;
 }

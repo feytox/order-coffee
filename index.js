@@ -33,6 +33,31 @@ addButton.addEventListener("click", () => {
     form.insertBefore(newBeverage, insertBefore);
 });
 
+function renumberBeverages() {
+    const beverages = form.querySelectorAll(".beverage");
+    beverages.forEach((fieldset, i) => {
+        const index = i + 1;
+        fieldset.querySelector(".beverage-count").textContent =
+            `Напиток №${index}`;
+
+        fieldset.querySelectorAll('input[type="radio"]').forEach((radio) => {
+            radio.name = `milk-${index}`;
+        });
+
+        fieldset.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+            cb.name = `options-${index}`;
+        });
+    });
+}
+
+form.addEventListener("click", (event) => {
+    if (!event.target.closest(".delete-button")) return;
+    if (getBeverageCount() <= 1) return;
+
+    event.target.closest(".beverage").remove();
+    renumberBeverages();
+});
+
 const overlay = document.getElementById("overlay");
 const modal = document.getElementById("modal");
 const modalClose = document.getElementById("modal-close");
