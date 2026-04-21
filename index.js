@@ -32,3 +32,27 @@ addButton.addEventListener("click", () => {
     const newBeverage = createBeverage();
     form.insertBefore(newBeverage, insertBefore);
 });
+
+// Задача 3 — модальное окно
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("modal");
+const modalClose = document.getElementById("modal-close");
+
+function openModal() {
+    overlay.classList.remove("hidden");
+    modal.classList.remove("hidden");
+}
+
+function closeModal() {
+    overlay.classList.add("hidden");
+    modal.classList.add("hidden");
+}
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    openModal();
+});
+
+// Задача 4 — закрытие модального окна
+modalClose.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
