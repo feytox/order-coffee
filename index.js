@@ -92,10 +92,11 @@ function closeModal() {
     modal.classList.add("hidden");
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const modalContent = document.getElementById("modal-content");
-    modalContent.innerHTML = `<p>${getOrderCountText()}</p>`;
+    const modalContent = document.getElementById('modal-content');
+    const orders = collectOrderData();
+    modalContent.innerHTML = `<p>${getOrderCountText()}</p>${buildOrderTable(orders)}`;
     openModal();
 });
 
