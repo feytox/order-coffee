@@ -45,7 +45,6 @@
     border-radius: 5px;
 }
 
-/* Задача 3 — модальное окно */
 .overlay {
     position: fixed;
     inset: 0;

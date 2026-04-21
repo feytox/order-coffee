@@ -33,7 +33,6 @@ addButton.addEventListener("click", () => {
     form.insertBefore(newBeverage, insertBefore);
 });
 
-// Задача 3 — модальное окно
 const overlay = document.getElementById("overlay");
 const modal = document.getElementById("modal");
 const modalClose = document.getElementById("modal-close");
@@ -53,6 +52,5 @@ form.addEventListener("submit", (event) => {
     openModal();
 });
 
-// Задача 4 — закрытие модального окна
 modalClose.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
