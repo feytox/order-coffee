@@ -94,11 +94,29 @@ function closeModal() {
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+    const modalContent = document.getElementById("modal-content");
+    modalContent.innerHTML = `<p>${getOrderCountText()}</p>`;
     openModal();
 });
 
 modalClose.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
+
+function getMultiple(number, one, few, many) {
+    const mod10 = number % 10;
+    const mod100 = number % 100;
+
+    if (mod100 >= 11 && mod100 <= 19) return many;
+    if (mod10 === 1) return one;
+    if (mod10 >= 2 && mod10 <= 4) return few;
+    return many;
+}
+
+function getOrderCountText() {
+    const count = getBeverageCount();
+    const word = getMultiple(count, "напиток", "напитка", "напитков");
+    return `Вы заказали ${count} ${word}`;
+}
 
 
 function collectOrderData() {
